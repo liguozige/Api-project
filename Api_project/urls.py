@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Api_app.views import *
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('help/',v_help),
     path('',login),
     path('login_action/',login_action),
-    path('register_action/',register_action)
+    path('register_action/',register_action),
+    path('index/',TemplateView.as_view(template_name='index.html')),
 ]

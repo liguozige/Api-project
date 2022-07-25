@@ -30,7 +30,7 @@ def login_action(request):
         auth.login(request,user)
         request.session['user'] = username
         # 跳转到首页
-        return HttpResponseRedirect('/help/')  # 此页面还没写，先填写help吧
+        return HttpResponseRedirect('/index/')  # 此页面还没写，先填写help吧
 
 # 注册功能
 def register_action(request):
@@ -45,6 +45,6 @@ def register_action(request):
         user.save()
         auth.login(request,user)
         request.session['user'] = username
-        return HttpResponseRedirect('/help/')
+        return HttpResponseRedirect('/index/')
     except:# 失败，捕获异常，并返回登录页面
         return login(request,'用户名已存在')
