@@ -24,7 +24,7 @@
             <el-progress :text-inside="true" :stroke-width="13" :percentage="70"></el-progress>
             <el-progress :text-inside="true" :stroke-width="13" :percentage="100" status="success"></el-progress>
             <el-progress :text-inside="true" :stroke-width="13" :percentage="80" status="warning"></el-progress>
-            <el-progress :text-inside="true" :stroke-width="13" :percentage="50" status="exception"></el-progress>
+
           </el-card>
           <el-card class="box-card" style="width: -webkit-calc(70% - 20px);float: left;">
             <div slot="header" class="clearfix">
