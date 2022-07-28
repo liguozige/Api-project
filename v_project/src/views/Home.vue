@@ -3,10 +3,50 @@
     <el-container style="height: 100%;">
       <el-aside width="200px">Aside</el-aside>
       <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
-        <el-footer style="height: 160px">
-          <el-card class="box-card" style="width: 100%;height: 80%;margin-top: 15px;text-align: left">
+        <el-header>
+          <img src="" alt="">
+        </el-header>
+        <el-main>
+          <el-card class="box-card" style="width: 30%;float: left;margin-right: 10px;">
+            <div slot="header" class="clearfix">
+              <span>项目总览</span>
+              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            </div>
+            <p>项目总数</p>
+            <p>接口总数</p>
+            <p>用例总数</p>
+          </el-card>
+          <el-card class="box-card" style="width: -webkit-calc(70% - 20px);float: left;">
+            <div slot="header" class="clearfix">
+              <span>项目总览</span>
+              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            </div>
+            <el-progress :text-inside="true" :stroke-width="13" :percentage="70"></el-progress>
+            <el-progress :text-inside="true" :stroke-width="13" :percentage="100" status="success"></el-progress>
+            <el-progress :text-inside="true" :stroke-width="13" :percentage="80" status="warning"></el-progress>
+            <el-progress :text-inside="true" :stroke-width="13" :percentage="50" status="exception"></el-progress>
+          </el-card>
+          <el-card class="box-card" style="width: -webkit-calc(70% - 20px);float: left;">
+            <div slot="header" class="clearfix">
+              <span>项目总览</span>
+              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            </div>
+            <p>项目总数</p>
+            <p>接口总数</p>
+            <p>用例总数</p>
+          </el-card>
+          <el-card class="box-card" style="width: 30%;float: left;margin-left: 10px;">
+            <div slot="header" class="clearfix">
+              <span>项目总览</span>
+              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            </div>
+            <p>项目总数</p>
+            <p>接口总数</p>
+            <p>用例总数</p>
+          </el-card>
+        </el-main>
+        <el-footer style="min-height: 130px;padding-top: 15px;text-align: left;">
+          <el-card class="box-card" style="width: 100%;min-height: 80%;">
             <div v-for="o in 4" :key="o" class="text item">
               {{'列表内容 ' + o }}
             </div>
@@ -39,19 +79,13 @@ export default {
   .el-aside {
     background-color: #D3DCE6;
     color: #333;
-    text-align: center;
-    line-height: 200px;
+
   }
 
   .el-main {
     background-color: #E9EEF3;
     color: #333;
-    text-align: center;
-    line-height: 160px;
-  }
-
-  body > .el-container {
-    margin-bottom: 40px;
+    line-height: 10px;
   }
 
   .el-container:nth-child(5) .el-aside,
@@ -63,15 +97,32 @@ export default {
     line-height: 320px;
   }
 
-   .text {
+  .text {
     font-size: 14px;
   }
 
   .item {
-    padding: 12px 0;
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
   }
 
   .box-card {
+    max-height: 48%;
+    min-height: 48%;
+  }
+  .el-card{
+    background-color: white;
+    text-align: left;
+    margin-bottom: 10px;
+    overflow-y: auto;
 
   }
 </style>
