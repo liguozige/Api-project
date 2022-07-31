@@ -2,8 +2,9 @@ from django.shortcuts import render
 from Api_app.models import *
 import time
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
+import json
 
 # Create your views here.
 def v_help(request):
@@ -48,3 +49,10 @@ def register_action(request):
         return HttpResponseRedirect('/index/')
     except:# 失败，捕获异常，并返回登录页面
         return login(request,'用户名已存在')
+
+
+# 获取统计数据
+def get_tj_datas(request):
+    tj_datas={}
+    tj_datas["notices"]=list(DB_notice.objects.all().values('content'))[::-1]
+    return HttpResponse(json.dumps(tj_datas),content_type='application/json')

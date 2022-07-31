@@ -25,4 +25,5 @@ urlpatterns = [
     path('login_action/',login_action),
     path('register_action/',register_action),
     path('index/',TemplateView.as_view(template_name='index.html')),
+    path('get_tj_datas/',get_tj_datas),
 ]
