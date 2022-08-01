@@ -22,8 +22,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('help/',v_help),
     path('',login),
+    path('accounts/login/',login),
     path('login_action/',login_action),
     path('register_action/',register_action),
-    path('index/',TemplateView.as_view(template_name='index.html')),
+    # path('index/',TemplateView.as_view(template_name='index.html')),
     path('get_tj_datas/',get_tj_datas),
+    path('get_real_time_datas/',get_real_time_datas),
+    path('index/',index),
+    path('logout/',logout),
+
 ]

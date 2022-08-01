@@ -10,7 +10,7 @@
             <el-col :span="6">
               <div class="staticbanner" style="background-color: #409eff">
                 <div class="title">
-                  <p>官方接口: 19</p>
+                  <p>官方接口: {{ real_time_datas.ApiShop_count }}</p>
                   <el-tag size="mini" style="color: #409eff">实时</el-tag>
                 </div>
               </div>
@@ -19,7 +19,7 @@
             <el-col :span="6">
               <div class="staticbanner" style="background-color: #67c23a">
                 <div class="title">
-                  <p>官方接口: 19</p>
+                  <p>官方接口: {{ real_time_datas.UnReadNews_count }}</p>
                   <el-tag size="mini" style="color: #67c23a">实时</el-tag>
                 </div>
               </div>
@@ -28,7 +28,7 @@
             <el-col :span="6">
               <div class="staticbanner" style="background-color: #e6a23c">
                 <div class="title">
-                  <p>官方接口: 19</p>
+                  <p>官方接口: {{ real_time_datas.RunCase_count }}</p>
                   <el-tag size="mini" style="color: #e6a23c">实时</el-tag>
                 </div>
               </div>
@@ -37,7 +37,7 @@
             <el-col :span="6">
               <div class="staticbanner" style="background-color: #9299a1">
                 <div class="title">
-                  <p>官方接口: 19</p>
+                  <p>官方接口: {{ real_time_datas.Import_count }}</p>
                   <el-tag size="mini" style="color: #9299a1">实时</el-tag>
                 </div>
               </div>
@@ -49,22 +49,22 @@
             <div slot="header" class="clearfix">
               <span>项目总览</span>
             </div>
-            <p>项目总数</p>
-            <p>接口总数</p>
-            <p>用例总数</p>
-            <p>环境总数</p>
-            <p>用户总数</p>
+            <p>项目总数:{{ tj_datas.overview.project_count }}</p>
+            <p>接口总数:{{ tj_datas.overview.api_count }}</p>
+            <p>用例总数:{{tj_datas.overview.case_count}}</p>
+            <p>环境总数:{{tj_datas.overview.env_count}}</p>
+            <p>用户总数:{{tj_datas.overview.user_count}}</p>
           </el-card>
           <el-card class="box-card" style="width: -webkit-calc(70% - 20px);float: left;">
             <div slot="header" class="clearfix">
               <span>上次监控情况</span>
             </div>
             <span style="font-size: xx-small">用例通过率</span>
-            <el-progress style="margin-bottom: 10px" :text-inside="true" :stroke-width="15" :percentage="70"></el-progress>
+            <el-progress style="margin-bottom: 10px" :text-inside="true" :stroke-width="15" :percentage="tj_datas.monitor.case_pass"></el-progress>
             <span style="font-size: xx-small">接口通过率</span>
-            <el-progress style="margin-bottom: 10px"  :text-inside="true" :stroke-width="15" :percentage="100" status="success"></el-progress>
+            <el-progress style="margin-bottom: 10px"  :text-inside="true" :stroke-width="15" :percentage="tj_datas.monitor.api_pass" status="success"></el-progress>
             <span style="font-size: xx-small">用例失败率</span>
-            <el-progress style="margin-bottom: 10px"  :text-inside="true" :stroke-width="15" :percentage="80" status="warning"></el-progress>
+            <el-progress style="margin-bottom: 10px"  :text-inside="true" :stroke-width="15" :percentage="tj_datas.monitor.case_fail" status="warning"></el-progress>
 
           </el-card>
           <el-card class="box-card" style="width: -webkit-calc(70% - 20px);float: left;">
@@ -84,11 +84,11 @@
               </thead>
               <tbody>
               <tr>
-                <td><el-progress type="circle" :percentage="25" color="#67c23a" style="margin-right: 25px;margin-left: 20px"></el-progress></td>
-                <td><el-progress type="circle" :percentage="25" color="#ff4949" style="margin-right: 25px"></el-progress></td>
-                <td><el-progress type="circle" :percentage="25" style="margin-right: 25px"></el-progress></td>
-                <td><el-progress type="circle" :percentage="25" color="#e6a23c" style="margin-right: 25px"></el-progress></td>
-                <td><el-progress type="circle" :percentage="25"></el-progress></td>
+                <td><el-progress type="circle" :percentage="tj_datas.contribution.project" color="#67c23a" style="margin-right: 25px;margin-left: 20px"></el-progress></td>
+                <td><el-progress type="circle" :percentage="tj_datas.contribution.case" color="#ff4949" style="margin-right: 25px"></el-progress></td>
+                <td><el-progress type="circle" :percentage="tj_datas.contribution.api" style="margin-right: 25px"></el-progress></td>
+                <td><el-progress type="circle" :percentage="tj_datas.contribution.monitor" color="#e6a23c" style="margin-right: 25px"></el-progress></td>
+                <td><el-progress type="circle" :percentage="tj_datas.contribution.case_run"></el-progress></td>
               </tr>
               </tbody>
             </table>
@@ -98,8 +98,8 @@
               <span>待处理消息</span>
               <el-button style="float: right; padding: 3px 0" type="text">查看更多</el-button>
             </div>
-            <div v-for="o in 100" class="text item">
-              {{'消息: '+o}}
+            <div v-for="o in tj_datas.news" class="text item">
+              {{'消息: '+o.content}}
             </div>
           </el-card>
         </el-main>
@@ -124,8 +124,34 @@ export default {
   data(){
     return{
       tj_datas:{
-        notices:[]
-      }
+        notices:[],
+        news:[],
+        overview:{
+          project_count:0,
+          api_count:0,
+          case_count:0,
+          env_count:0,
+          user_count:0
+        },
+        monitor:{
+          case_pass:0,
+          api_pass:0,
+          case_fail:0
+        },
+        contribution:{
+          project:0,
+          case:0,
+          api:0,
+          monitor:0,
+          case_run:0,
+        },
+      },
+      real_time_datas:{
+        ApiShop_count:0,
+        UnReadNews_count:0,
+        RunCase_count:0,
+        Import_count:0,
+      },
     }
   },
   components:{
@@ -133,15 +159,23 @@ export default {
   },
   mounted:function (){
     axios('http://localhost:8000/get_tj_datas/').then(res=>{
-      this.tj_datas=res.data;
+      this.tj_datas=res.data
     })
+    axios.get('http://localhost:8000/get_real_time_datas/').then(res=>{
+        this.real_time_datas=res.data
+      })
+    setInterval(()=>{
+        axios.get('http://localhost:8000/get_real_time_datas/').then(res=>{
+        this.real_time_datas=res.data
+      })
+    },100000)
   }
 }
 </script>
 
 <style>
   .el-header, .el-footer {
-    background: linear-gradient(to right, #a6c3fc, #f0d7fa);
+    background: linear-gradient(to right, #E0EAFC, #CFDEF3);
     color: #333;
     text-align: center;
     line-height: 0px;

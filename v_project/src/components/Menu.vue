@@ -1,17 +1,20 @@
 <template>
     <el-menu
-        :default-openeds="['1','2']"
+      :default-openeds="['1','2']"
       default-active="2"
+      router
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
+      <el-menu-item index="/">首页Home</el-menu-item>
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-menu"></i>
           <span>功能区</span>
+
         </template>
           <el-menu-item index="1-1">项目管理</el-menu-item>
           <el-menu-item index="1-2">环境管理</el-menu-item>
@@ -34,8 +37,8 @@
           <el-menu-item index="2-1">个人资料</el-menu-item>
           <el-menu-item index="2-2">个人贡献</el-menu-item>
           <el-menu-item index="2-3">发送消息</el-menu-item>
-          <a href="http://localhost:8000/help/"><el-menu-item index="2-4">帮助</el-menu-item></a>
-          <el-menu-item index="2-5">退出</el-menu-item>
+          <a href="http://localhost:8000/help/"><el-menu-item>帮助</el-menu-item></a>
+          <a href="http://localhost:8000/logout/"><el-menu-item>退出</el-menu-item></a>
       </el-submenu>
 
       <el-submenu index="3">
