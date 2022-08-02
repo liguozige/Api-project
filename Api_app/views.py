@@ -63,9 +63,11 @@ def register_action(request):
 
 # 获取统计数据
 def get_tj_datas(request):
+    # 获取用户Id
+    userID = request.user.id
     tj_datas={}
     tj_datas["notices"]=list(DB_notice.objects.all().values('content'))[::-1]
-    tj_datas["news"] = [{"content":"haha"}]
+    tj_datas["news"] = list(DB_news.objects.filter(to_user_id=userID).values())[::-1]
     tj_datas["overview"] = {
         "project_count":80,
         "api_count":30,
@@ -103,3 +105,4 @@ def get_real_time_datas(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
+
