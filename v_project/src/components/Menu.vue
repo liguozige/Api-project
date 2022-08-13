@@ -16,7 +16,7 @@
           <span>功能区</span>
 
         </template>
-          <el-menu-item index="1-1">项目管理</el-menu-item>
+          <el-menu-item index="/project_list/">项目管理</el-menu-item>
           <el-menu-item index="1-2">环境管理</el-menu-item>
           <el-menu-item index="1-3">官方接口库</el-menu-item>
           <el-menu-item index="1-4">线上监控</el-menu-item>
