@@ -18,6 +18,7 @@ from django.urls import path
 from Api_app.views import *
 from django.views.generic import TemplateView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('help/',v_help),
@@ -30,5 +31,8 @@ urlpatterns = [
     path('get_real_time_datas/',get_real_time_datas),
     path('index/',index),
     path('logout/',logout),
+    path('get_project_list/',get_project_list),
+    path('add_project/',add_project),
+    path('delete_project/',delete_project),
 
 ]

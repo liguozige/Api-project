@@ -4,3 +4,4 @@ from Api_app.models import *
 
 admin.site.register(DB_notice)
 admin.site.register(DB_news)
+admin.site.register(DB_project_list)

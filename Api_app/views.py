@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from Api_app.models import *
 import time
 from django.contrib import auth
@@ -106,3 +106,33 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
+
+# 获取项目列表数据
+def get_project_list(request):
+    keys = request.GET.get('keys',None)
+    if keys:
+        project_list_data = list((DB_project_list.objects.filter(name__contains=keys)|DB_project_list.objects.filter(des__contains=keys)).values())[::-1]
+    else:
+        project_list_data = list(DB_project_list.objects.all().values())[::-1]
+    # 增加字段
+    for i in project_list_data:
+        try:
+            creater_name = get_object_or_404(User,pk = i['creater']).username
+        except:
+            creater_name = "未知用户"
+        i["creater_name"] = creater_name
+    return HttpResponse(json.dumps(project_list_data),content_type='application/json')
+
+
+# 新增项目
+def add_project(request):
+    uid = request.user.id if request.user.id else 0
+    DB_project_list.objects.create(creater=uid,des='默认描述')
+    return get_project_list(request)
+
+
+# 删除项目
+def delete_project(request):
+    project_id = request.GET['project_id']
+    DB_project_list.objects.filter(id=project_id).delete()
+    return get_project_list(request)
