@@ -45,7 +45,7 @@
                   <el-button style="width: 121px" @click="Add_project()">新增项目</el-button>
                 </template>
                 <template slot-scope="scope">
-                  <router-link :to ="'/project_detail?project_id='+ scope.row.id"><el-button size="mini" type="primary">进入</el-button></router-link>
+                  <router-link :to ="'/project_detail?project_id='+ scope.row.id"><el-button size="mini" type="primary">修改</el-button></router-link>
                   &nbsp;
                   <el-button size="mini" type="danger" @click="Delete_project(scope.row.id)">删除</el-button>
 
