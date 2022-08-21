@@ -34,5 +34,7 @@ urlpatterns = [
     path('get_project_list/',get_project_list),
     path('add_project/',add_project),
     path('delete_project/',delete_project),
+    path('save_project/',save_project),
+    path('get_project_detail/',get_project_detail)
 
 ]

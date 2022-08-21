@@ -136,3 +136,17 @@ def delete_project(request):
     project_id = request.GET['project_id']
     DB_project_list.objects.filter(id=project_id).delete()
     return get_project_list(request)
+
+
+# 获取单个项目详情
+def get_project_detail(request):
+    id = request.GET['id']
+    form = list(DB_project_list.objects.filter(id=id).values())[0]
+    return HttpResponse(json.dumps(form),content_type="application/json")
+
+
+# 保存项目
+def save_project(request):
+    form = request
+    print(form)
+    return HttpResponse(form,content_type="application/json")
