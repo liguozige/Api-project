@@ -147,6 +147,7 @@ def get_project_detail(request):
 
 # 保存项目
 def save_project(request):
-    form = request
-    print(form)
-    return HttpResponse(form,content_type="application/json")
+    form = json.loads(request.body.decode('utf-8'))
+    # DB_project_list.objects.filter(id=form['id']).update(name=form['name'], des=form['des'])
+    DB_project_list.objects.filter(id=form['id']).update(**form)
+    return HttpResponse(form, content_type="application/json")
