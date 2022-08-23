@@ -113,7 +113,7 @@ def get_project_list(request):
     if keys:
         project_list_data = list((DB_project_list.objects.filter(name__contains=keys)|DB_project_list.objects.filter(des__contains=keys)).values())[::-1]
     else:
-        project_list_data = list(DB_project_list.objects.all().values())[::-1]
+        project_list_data = list(DB_project_list.objects.filter(deleted=False).values())[::-1]
     # 增加字段
     for i in project_list_data:
         try:
@@ -134,7 +134,7 @@ def add_project(request):
 # 删除项目
 def delete_project(request):
     project_id = request.GET['project_id']
-    DB_project_list.objects.filter(id=project_id).delete()
+    DB_project_list.objects.filter(id=project_id).update(deleted=True)
     return get_project_list(request)
 
 

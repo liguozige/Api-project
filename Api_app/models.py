@@ -23,6 +23,7 @@ class DB_project_list(models.Model):
     des = models.CharField(max_length=500,null=True,blank=True,default='--')
     creater = models.IntegerField(default=0)
     des = models.CharField(max_length=500,null=True,blank=True,default='--')
+    deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
