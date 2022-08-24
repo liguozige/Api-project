@@ -1,7 +1,7 @@
 <template>
     <el-menu
       :default-openeds="['1','2']"
-      default-active="2"
+      :default-active="da"
       router
       class="el-menu-vertical-demo"
       @open="handleOpen"
@@ -59,6 +59,11 @@
 <script>
 export default {
   name: "Menu",
+  data(){
+    return{
+      da:window.location.hash.split('#')[1].split('?')[0],
+    }
+  },
   methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
